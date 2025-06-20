@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-
 class BlogCategoriesTableSeeder extends Seeder
 {
     /**

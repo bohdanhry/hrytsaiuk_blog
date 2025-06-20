@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestTestController;
-use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\Blog\Admin\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,8 +20,10 @@ Route::middleware([
     Route::resource('rest', RestTestController::class)->names('restTest');
 });
 
-Route::prefix('blog')->group(function () {
-    Route::resource('posts', PostController::class)->names('blog.posts');
+Route::prefix('admin/blog')->name('blog.admin.')->group(function () {
+    Route::resource('posts', PostController::class)
+        ->except(['show'])
+        ->names('posts');
 });
 
 //Адмінка
@@ -35,4 +37,8 @@ Route::group($groupData, function () {
     Route::resource('categories', CategoryController::class)
         ->only($methods)
         ->names('blog.admin.categories');
+    //BlogPost
+    Route::resource('posts', PostController::class)
+        ->except(['show'])                               //не робити маршрут для методу show
+        ->names('blog.admin.posts');
 });
