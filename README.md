@@ -1,1 +1,0 @@
-# hrytsaiuk_blog
