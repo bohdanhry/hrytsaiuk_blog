@@ -19,4 +19,16 @@ class PostController extends Controller
         // Повертаємо JSON з пагінацією
         return response()->json($posts);
     }
+
+    public function show($id)
+    {
+        $post = BlogPost::with(['user:id,name', 'category:id,title'])->find($id);
+
+        if (!$post) {
+            return response()->json(['error' => 'Пост не знайдено'], 404);
+        }
+
+        return response()->json($post);
+    }
+
 }
